@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const errorHandler = require('./middleware/error');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
@@ -26,5 +27,8 @@ app.use('/api', require('./routes'));
 
 // 允许CORS
 app.use(cors());
+
+// 错误处理 中间件
+app.use(errorHandler);
 
 app.listen(PORT, console.log(`服务器运行在${PORT}端口`));
